@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Justin Searls"]
   spec.email         = ["searls@gmail.com"]
 
-  spec.summary       = %q{Helps you migrate from monolithic architecture to services}
+  spec.summary       = %q{Helps you migrate from monolithic Ruby to services}
   spec.homepage      = "https://github.com/searls/soa"
 
   # Specify which files should be added to the gem when it is released.
