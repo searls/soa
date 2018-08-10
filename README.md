@@ -1,35 +1,77 @@
-# Soa
+# SOA
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/soa`. To experiment with that code, run `bin/console` for an interactive prompt.
+A lot of Ruby and Rails developers can see writing on walls that tells them
+small, focused services are the future. Here is a quote from a well-known
+Ruby thoughtleader, promoting them on the popular microservice platform
+called Twitter dot com:
 
-TODO: Delete this and the text above, and describe your gem
+> Microservices are great for turning method calls in to distributed computing
+> problems
+ - [Aaron Patterson](https://twitter.com/tenderlove) on [Aug. 9,
+   2018](https://twitter.com/tenderlove/status/1027591532847816704)
+
+I've helped teams maintain old, slow, and confusing monolithic applications and
+it's taught me one thing: monolithic codebases become more complex over
+time. As a result, many companies have decided to build non-monolithic
+applications instead (these are called "services"; the better, more modern ones
+are called "microservices"). Applications built with services are initially
+much more difficult to create and operate, but they also tend to die sooner,
+which is the best known way to reduce code complexity.
+
+But how do you write services and microservices in a monolithic language like
+Ruby? Up until now, writing services required JavaScript and AWS Lambda. But
+because I prefer to write Ruby and sometimes I work offline (AWS can't be
+used offline yet), I wrote the SOA gem.
+
+The SOA gem is a drop-in replacement for Ruby's built-in method dispatch system.
+You can continue to call legacy methods like you always have alongside new
+service invocations registered with the SOA gem. It's the perfect companion for
+teams looking to make a more gradual transition to a services architecture
+without rewriting their entire years-old system in JavaScript and AWS Lambda.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+To install SOA, we use the command line command `gem` which communicates with
+the RubyGems.org microservice to download the necessary files:
 
-```ruby
-gem 'soa'
+```
+gem install soa
 ```
 
-And then execute:
+And then, in your code, you can activate "SOA mode" in your Ruby interpreter
+like this
 
-    $ bundle
+``` ruby
+require "soa"
+```
 
-Or install it yourself as:
+[Note that the SOA gem is only tested with C-Ruby. If you want to write services
+with JRuby, you'll need to wait for the release of a SOAP gem.]
 
-    $ gem install soa
+Once required, the SOA gem will prepare your Ruby runtime to run services and
+yes microservices instead using our easy-to-use DSL.
 
 ## Usage
 
-TODO: Write usage instructions here
+To create a new microservice, we use the `service` method and specify a route
+path like so:
 
-## Development
+``` ruby
+require "soa"
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+service "/api/user/:id" do |id|
+  User.find(id)
+end
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+In order to invoke a SOA microservice, we just `call_service` with the URL. The
+service is then looked up from the SOA Service Registry, the params are parsed,
+the service is invoked, and the results are returned.
 
-## Contributing
+``` ruby
+user = call_service "/api/user/45"
+puts user.id # => 45
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/searls/soa.
+It would barely be any easier to just define and call a legacy monolithic Ruby
+method!
