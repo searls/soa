@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    soa (1.0.0)
+    soa (2.0.0)
 
 GEM
   remote: https://rubygems.org/
