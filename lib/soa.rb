@@ -41,10 +41,10 @@ end
 
 module Kernel
   def service(route, &blk)
-    Soa.register(route, blk)
+    SOA.register(route, blk)
   end
 
   def call_service(url, *args)
-    Soa.invoke(url, *args)
+    SOA.invoke(url, *args)
   end
 end
