@@ -46,8 +46,11 @@ like this
 require "soa"
 ```
 
-[Note that the SOA gem is only tested with C-Ruby. If you want to write services
-with JRuby, you'll need to wait for the release of a SOAP gem.]
+[Note that the SOA gem is only tested with C-Ruby. ~~If you want to write
+services with JRuby, you'll need to wait for the release of a SOAP gem.~~
+**Update: thanks to [Tom Enebo](https://github.com/enebo), SOA [now supports
+JRuby](https://github.com/searls/soa/pull/1) and also works as of version
+2.0.0**]
 
 Once required, the SOA gem will prepare your Ruby runtime to run services and
 microservices instead using our easy-to-use DSL.
