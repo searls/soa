@@ -7,7 +7,7 @@ called Twitter dot com:
 
 > Microservices are great for turning method calls in to distributed computing
 > problems
-> - [Aaron Patterson](https://twitter.com/tenderlove) on [Aug. 9,
+> — [Aaron Patterson](https://twitter.com/tenderlove) on [Aug. 9,
    2018](https://twitter.com/tenderlove/status/1027591532847816704)
 
 I've helped many teams maintain old, slow, & confusing monolithic applications
